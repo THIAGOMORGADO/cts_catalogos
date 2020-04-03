@@ -2,24 +2,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
-const morgan = require('morgan')
-
+const morgan = require('morgan');
+const routes = require('./routes');
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
-mongoose.connect(
-    'mongodb://localhost:27017/nodeapi', 
-    { useNewUrlParser: true, 
-      useUnifiedTopology: true 
-    });
+mongoose.connect('mongodb://localhost:27017/nodeapi', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-    requireDir('./models')
-   
+requireDir('./models');
 
-app.use('/', require('./routes'));
+app.use(routes);
 
-app.listen(3333)
+app.listen(3333);
