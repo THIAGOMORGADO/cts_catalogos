@@ -4,7 +4,13 @@ const multerconfig = require('./config/multer');
 
 const routes = express.Router();
 
+// Rotas da Controller
+
 const ProductController = require('./controllers/ProdutcController');
+
+// Rotas da Model
+
+const Image = require('./models/Imagens');
 
 // Rota de crud do banco de dados
 
@@ -16,11 +22,16 @@ routes.delete('/products/:id', ProductController.detroy);
 
 // Rota Para subir arquivos UOLOAD
 
-routes.post('/posts', multer(multerconfig).single('file'), (req, res) => {
-  console.log(req.file);
-  return res.json({
-    Evento: 'Subindo Imagens com sucesso',
+routes.post('/posts', multer(multerconfig).single('file'), async (req, res) => {
+  const { originalname: name, size, filename: key } = req.file;
+
+  const image = await Image.create({
+    name,
+    size,
+    key,
+    url: '',
   });
+  return res.json(image);
 });
 
 module.exports = routes;
