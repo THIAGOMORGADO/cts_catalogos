@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginete = require('mongoose-paginate');
 
 const ImageSchema = new mongoose.Schema({
   name: String,
@@ -10,4 +11,5 @@ const ImageSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+ImageSchema.plugin(mongoosePaginete);
 module.exports = mongoose.model('Image', ImageSchema);

@@ -7,6 +7,7 @@ const routes = express.Router();
 // Rotas da Controller
 
 const ProductController = require('./controllers/ProdutcController');
+const ImageController = require('./controllers/ImageController');
 
 // Rotas da Model
 
@@ -42,5 +43,7 @@ routes.post('/posts', multer(multerconfig).single('file'), async (req, res) => {
   });
   return res.json(image);
 });
+routes.get('/posts', ImageController.index);
+routes.get('/posts/:id', ImageController.show);
 
 module.exports = routes;
