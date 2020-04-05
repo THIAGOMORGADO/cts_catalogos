@@ -20,6 +20,15 @@ routes.post('/products', ProductController.store);
 routes.put('/products/:id', ProductController.update);
 routes.delete('/products/:id', ProductController.detroy);
 
+// Rotas de cadastro Usuario;
+
+routes.get('/user', (req, res) => {
+  return res.json({
+    Evento: 'Criando Rotas de cadastro de login',
+    DEV: 'Thiago Morgado',
+  });
+});
+
 // Rota Para subir arquivos UOLOAD
 
 routes.post('/posts', multer(multerconfig).single('file'), async (req, res) => {
