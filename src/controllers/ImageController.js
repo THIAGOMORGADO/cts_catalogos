@@ -1,5 +1,3 @@
-const yup = require('yup');
-
 const modelImage = require('../models/Imagens');
 
 module.exports = {
@@ -18,23 +16,6 @@ module.exports = {
   async show(req, res) {
     const product = await modelImage.findById(req.params.id);
     console.log(product);
-    return res.json(product);
-  },
-  async store(req, res) {
-    const schema = yup.object().shape({
-      title: yup.string().required(),
-      description: yup.string().required(),
-      url: yup.string().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res
-        .status(400)
-        .json({ error: 'Validação falhou, verifique seus dados' });
-    }
-
-    const product = await modelImage.create(req.body);
-
     return res.json(product);
   },
   async uploads(req, res) {
