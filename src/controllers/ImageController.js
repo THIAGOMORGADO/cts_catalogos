@@ -1,6 +1,4 @@
 const yup = require('yup');
-const multer = require('multer');
-const multerconfig = require('../config/multer');
 
 const modelImage = require('../models/Imagens');
 
@@ -39,18 +37,15 @@ module.exports = {
 
     return res.json(product);
   },
-  async store(req, res) {
-    multer(multerconfig).single('file');
-    async (req, res) => {
-      const { originalname: name, size, filename: key } = req.file;
+  async uploads(req, res) {
+    const { originalname: name, size, filename: key } = req.file;
 
-      const image = await modelImage.create({
-        name,
-        size,
-        key,
-        url: '',
-      });
-      return res.json(image);
-    };
+    const image = await modelImage.create({
+      name,
+      size,
+      key,
+      url: '',
+    });
+    return res.json(image);
   },
 };

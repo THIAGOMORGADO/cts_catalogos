@@ -11,8 +11,6 @@ const ImageController = require('./controllers/ImageController');
 
 // Rotas da Model
 
-const Image = require('./models/Imagens');
-
 // Rota de crud do banco de dados
 
 routes.get('/products', ProductController.index);
@@ -32,17 +30,11 @@ routes.get('/user', (req, res) => {
 
 // Rota Para subir arquivos UOLOAD
 
-routes.post('/posts', multer(multerconfig).single('file'), async (req, res) => {
-  const { originalname: name, size, filename: key } = req.file;
-
-  const image = await Image.create({
-    name,
-    size,
-    key,
-    url: '',
-  });
-  return res.json(image);
-});
+routes.post(
+  '/posts',
+  multer(multerconfig).single('file'),
+  ImageController.uploads
+);
 routes.get('/posts', ImageController.index);
 routes.get('/posts/:id', ImageController.show);
 
