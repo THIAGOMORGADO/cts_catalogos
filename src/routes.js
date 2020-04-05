@@ -8,6 +8,7 @@ const routes = express.Router();
 
 const ProductController = require('./controllers/ProdutcController');
 const ImageController = require('./controllers/ImageController');
+const UserController = require('./controllers/UserController');
 
 // Rotas da Model
 
@@ -21,12 +22,11 @@ routes.delete('/products/:id', ProductController.detroy);
 
 // Rotas de cadastro Usuario;
 
-routes.get('/user', (req, res) => {
-  return res.json({
-    Evento: 'Criando Rotas de cadastro de login',
-    DEV: 'Thiago Morgado',
-  });
-});
+routes.get('/user', UserController.useindex);
+routes.get('/user/:id', UserController.useshow);
+routes.post('/user', UserController.usestore);
+routes.put('/user', UserController.useupdate);
+routes.delete('/user', UserController.usedetroy);
 
 // Rota Para subir arquivos UOLOAD
 
