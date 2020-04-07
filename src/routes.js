@@ -38,4 +38,8 @@ routes.post(
 routes.get('/posts', ImageController.index);
 routes.get('/posts/:id', ImageController.show);
 
+routes.get('/msg', (res, req) => {
+  res.send('hello thiao');
+});
+
 module.exports = routes;
